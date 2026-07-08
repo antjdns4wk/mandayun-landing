@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="30년 미용 경력의 만다윤이 7년째 정착한 두피 케어 샴푸, 머드마스타 샴푸 랜딩페이지" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="만다윤 추천 | 머드마스타 샴푸" />
+  <meta property="og:description" content="30년 미용 경력의 만다윤이 7년째 정착한 두피 케어 샴푸" />
+  <!-- 카카오톡/SNS 공유 썸네일: 제품 이미지 URL 준비 후 아래 주석을 해제하세요.
+  <meta property="og:image" content="https://예시.com/제품이미지.jpg" /> -->
   <title>만다윤 추천 | 머드마스타 샴푸</title>
   <style>
     :root {
@@ -32,6 +37,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 84px;
     }
 
     body {
@@ -368,71 +374,6 @@
       font-size: 18px;
       letter-spacing: -0.035em;
       margin-bottom: 0;
-    }
-
-    .video-panel {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 28px;
-      align-items: stretch;
-      padding: 26px;
-      border-radius: var(--radius-lg);
-      background: var(--surface-2);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(234, 223, 210, 0.9);
-    }
-
-    .video-placeholder {
-      aspect-ratio: 16 / 9;
-      min-height: 320px;
-      border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(32, 25, 20, 0.78), rgba(106, 74, 49, 0.74)),
-        url('') center / cover;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .play-button {
-      width: 76px;
-      height: 76px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,.18);
-      border: 1px solid rgba(255,255,255,.38);
-      backdrop-filter: blur(12px);
-      margin-bottom: 18px;
-      font-size: 26px;
-    }
-
-    .video-copy {
-      padding: 10px 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .video-copy h2 {
-      font-size: clamp(28px, 3.4vw, 42px);
-      line-height: 1.18;
-      letter-spacing: -0.06em;
-      color: var(--brand-dark);
-      margin-bottom: 18px;
-    }
-
-    .video-copy p {
-      color: var(--muted);
-      font-size: 17px;
-      letter-spacing: -0.03em;
     }
 
     .pain-grid {
@@ -788,9 +729,12 @@
     }
 
     .checkbox input {
-      width: auto;
+      width: 18px;
+      height: 18px;
+      flex: none;
       min-height: auto;
-      margin-top: 5px;
+      margin-top: 4px;
+      accent-color: var(--brand);
     }
 
     .submit-btn {
@@ -917,6 +861,91 @@
       margin: 6px 0 0;
       font-size: 12.5px;
       color: var(--muted);
+    }
+
+    .addr-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .addr-row input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .addr-search-btn {
+      flex: none;
+      min-height: 54px;
+      padding: 0 18px;
+      border: 1px solid rgba(106, 74, 49, 0.3);
+      border-radius: 16px;
+      background: var(--brand-dark);
+      color: #fff;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    #postcode[readonly], #buyerAddress[readonly] {
+      cursor: pointer;
+      background: #fdf6ec;
+    }
+
+    /* 우편번호 검색 레이어 (팝업 대신 페이지 내 embed 방식) */
+    .postcode-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(32, 25, 20, 0.55);
+      padding: 20px;
+    }
+
+    .postcode-layer.show { display: flex; }
+
+    .postcode-box {
+      width: min(100%, 560px);
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .postcode-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      font-weight: 900;
+      color: var(--brand-dark);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .postcode-head button {
+      border: 0;
+      background: none;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 4px 8px;
+    }
+
+    .postcode-embed {
+      width: 100%;
+      height: min(70vh, 500px);
+    }
+
+    @media (max-width: 720px) {
+      .postcode-layer { padding: 0; }
+      .postcode-box { width: 100%; height: 100%; border-radius: 0; }
+      .postcode-embed { height: 100%; flex: 1; }
     }
 
     .notice-box {
@@ -1146,7 +1175,6 @@
 
     @media (max-width: 980px) {
       .hero-grid,
-      .video-panel,
       .story-wrap,
       .routine-content,
       .form-grid,
@@ -1207,7 +1235,6 @@
         padding: 48px 0;
       }
 
-      .video-panel,
       .routine,
       .form-card,
       .order-complete,
@@ -1313,35 +1340,6 @@
           <div class="product-visual">
             <div class="visual-note">
               제품 실물 이미지 또는 만다윤 사용 장면을 이 영역에 넣으면 전환율이 더 좋아집니다.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-tight" id="youtube">
-      <div class="container">
-        <div class="video-panel">
-          <div class="video-placeholder" aria-label="유튜브 영상 삽입 영역">
-            <!-- 실제 유튜브 영상을 넣을 때는 이 div 전체를 iframe으로 교체하세요.
-            예시:
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/영상ID" title="만다윤 두피 케어 영상" frameborder="0" allowfullscreen></iframe>
-            -->
-            <div class="play-button">▶</div>
-            <strong>만다윤 유튜브 영상 영역</strong>
-            <span>두피 케어 설명 영상 / 사용법 영상 / 후기 영상 삽입</span>
-          </div>
-          <div class="video-copy">
-            <h2>만다윤 채널을 보고 오셨다면, 이미 알고 계실 겁니다.</h2>
-            <p>
-              두피와 모발 관리는 비싼 제품을 많이 바르는 것보다, 매일 반복하는 기본 루틴을 제대로 잡는 것이 먼저입니다.
-              그중에서도 가장 먼저 바꿔야 할 것은 바로 매일 사용하는 샴푸입니다.
-            </p>
-            <p>
-              머드마스타 샴푸는 만다윤이 살롱 현장에서 수많은 고객의 두피와 모발 상태를 보며 직접 사용감과 만족도를 확인해온 제품입니다.
-            </p>
-            <div class="cta-row">
-              <a class="button button-primary" href="#order">지금 주문하기</a>
             </div>
           </div>
         </div>
@@ -1525,7 +1523,7 @@
               2) 아래 form 태그의 data-endpoint="" 안에 URL을 넣으세요.
               3) 전송되는 필드는 주문관리 시트 컬럼과 1:1 매핑됩니다.
                  (orderedAt, orderNo, channel, productName, option, qty, amount,
-                  buyerName, phone, address, depositorName, cashReceipt, cashReceiptNo)
+                  buyerName, phone, postcode, address, addressDetail, depositorName, cashReceipt, cashReceiptNo)
               4) 현재는 데모 모드라 제출 시 완료 화면만 표시됩니다.
             -->
             <form id="orderForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
@@ -1547,23 +1545,31 @@
 
               <div class="price-summary">
                 <span>결제금액</span>
-                <strong id="orderAmountText">0원</strong>
+                <div style="text-align:right;">
+                  <strong id="orderAmountText">0원</strong>
+                  <div id="orderCalcText" style="font-size:12.5px; font-weight:700; opacity:.75; margin-top:2px;"></div>
+                </div>
               </div>
 
               <div class="field-row">
                 <div class="field">
                   <label for="buyerName">주문자명</label>
-                  <input id="buyerName" name="buyerName" type="text" placeholder="이름" required />
+                  <input id="buyerName" name="buyerName" type="text" autocomplete="name" placeholder="이름" required />
                 </div>
                 <div class="field">
                   <label for="buyerPhone">연락처</label>
-                  <input id="buyerPhone" name="phone" type="tel" placeholder="010-0000-0000" required />
+                  <input id="buyerPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" pattern="01[016789]-\d{3,4}-\d{4}" title="휴대폰 번호를 확인해주세요. 예: 010-1234-5678" placeholder="010-0000-0000" required />
                 </div>
               </div>
 
               <div class="field">
-                <label for="buyerAddress">배송지 주소</label>
-                <input id="buyerAddress" name="address" type="text" placeholder="주소 + 상세주소 (동/호수까지)" required />
+                <label for="postcode">배송지 주소</label>
+                <div class="addr-row">
+                  <input id="postcode" name="postcode" type="text" placeholder="우편번호" readonly />
+                  <button type="button" class="addr-search-btn" id="addrSearchBtn">우편번호 검색</button>
+                </div>
+                <input id="buyerAddress" name="address" type="text" placeholder="우편번호 검색을 누르면 자동 입력됩니다" readonly style="margin-top:8px;" />
+                <input id="buyerAddressDetail" name="addressDetail" type="text" placeholder="상세주소 (동/호수 등)" style="margin-top:8px;" />
               </div>
 
               <div class="field">
@@ -1673,12 +1679,12 @@
           <form id="leadForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
             <div class="field">
               <label for="name">이름</label>
-              <input id="name" name="name" type="text" placeholder="이름을 입력해주세요" required />
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="이름을 입력해주세요" required />
             </div>
 
             <div class="field">
               <label for="phone">연락처</label>
-              <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" required />
+              <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" pattern="01[016789]-\d{3,4}-\d{4}" title="휴대폰 번호를 확인해주세요. 예: 010-1234-5678" placeholder="010-0000-0000" required />
             </div>
 
             <div class="field">
@@ -1784,10 +1790,23 @@
     </div>
   </footer>
 
+  <!-- 우편번호 검색 레이어 -->
+  <div class="postcode-layer" id="postcodeLayer" role="dialog" aria-modal="true" aria-label="우편번호 검색">
+    <div class="postcode-box">
+      <div class="postcode-head">
+        <span>우편번호 검색</span>
+        <button type="button" id="postcodeClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="postcode-embed" id="postcodeEmbed"></div>
+    </div>
+  </div>
+
   <div class="floating-cta" aria-label="하단 고정 주문 버튼">
     <a href="#order">지금 주문하기 · 입금 확인 후 발송</a>
   </div>
 
+  <!-- 카카오(다음) 우편번호 서비스 — 무료, API 키 불필요 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
     /* =====================================================
        주문 설정 — 실제 값으로 반드시 수정하세요.
@@ -1832,7 +1851,7 @@
           await fetch(endpoint, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(payload)
           });
         } else {
@@ -1840,6 +1859,7 @@
         }
         leadForm.reset();
         successMessage.style.display = 'block';
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (error) {
         alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
         console.error(error);
@@ -1856,6 +1876,7 @@
     const optionSelect = document.getElementById('orderOption');
     const qtySelect = document.getElementById('orderQty');
     const amountText = document.getElementById('orderAmountText');
+    const calcText = document.getElementById('orderCalcText');
     const nameInput = document.getElementById('buyerName');
     const phoneInput = document.getElementById('buyerPhone');
     const depositorInput = document.getElementById('depositorName');
@@ -1877,7 +1898,10 @@
     }
 
     function renderAmount() {
+      const opt = ORDER_CONFIG.options[Number(optionSelect.value) || 0];
+      const qty = Number(qtySelect.value) || 1;
       amountText.textContent = won(currentAmount());
+      calcText.textContent = opt.label + ' × ' + qty;
     }
 
     optionSelect.addEventListener('change', renderAmount);
@@ -1886,7 +1910,10 @@
 
     // 입금자명 자동 생성 (이름 + 휴대폰 뒷자리 4자리) — 직접 수정하면 자동 갱신 중단
     let depositorEdited = false;
-    depositorInput.addEventListener('input', () => { depositorEdited = true; });
+    depositorInput.addEventListener('input', () => {
+      depositorEdited = depositorInput.value.trim() !== '';
+      if (!depositorEdited) autoDepositor();
+    });
 
     function autoDepositor() {
       if (depositorEdited) return;
@@ -1898,6 +1925,83 @@
 
     nameInput.addEventListener('input', autoDepositor);
     phoneInput.addEventListener('input', autoDepositor);
+
+    // 연락처 입력 시 자동 하이픈
+    function attachPhoneFormat(el) {
+      if (!el) return;
+      el.addEventListener('input', function () {
+        const d = this.value.replace(/\D/g, '').slice(0, 11);
+        let out;
+        if (d.length < 4) out = d;
+        else if (d.length < 8) out = d.slice(0, 3) + '-' + d.slice(3);
+        else out = d.slice(0, 3) + '-' + d.slice(3, 7) + '-' + d.slice(7);
+        this.value = out;
+      });
+    }
+    attachPhoneFormat(phoneInput);
+    attachPhoneFormat(document.getElementById('phone'));
+
+    /* ---------- 우편번호 검색 (카카오/다음 우편번호 서비스) ---------- */
+    const postcodeInput = document.getElementById('postcode');
+    const addressInput = document.getElementById('buyerAddress');
+    const addressDetailInput = document.getElementById('buyerAddressDetail');
+
+    function openPostcodeSearch() {
+      if (typeof daum === 'undefined' || !daum.Postcode) {
+        // 스크립트 로드 실패(오프라인 등) 시 직접 입력으로 전환
+        postcodeInput.readOnly = false;
+        addressInput.readOnly = false;
+        addressInput.placeholder = '주소를 직접 입력해주세요';
+        addressInput.focus();
+        return;
+      }
+      openPostcodeLayer();
+    }
+
+    const postcodeLayer = document.getElementById('postcodeLayer');
+    const postcodeEmbed = document.getElementById('postcodeEmbed');
+
+    function closePostcodeLayer() {
+      postcodeLayer.classList.remove('show');
+      postcodeEmbed.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    function openPostcodeLayer() {
+      postcodeLayer.classList.add('show');
+      document.body.style.overflow = 'hidden'; // 뒤 배경 스크롤 잠금
+      postcodeEmbed.innerHTML = '';
+      new daum.Postcode({
+        width: '100%',
+        height: '100%',
+        oncomplete: function (data) {
+          // 도로명/지번 중 사용자가 선택한 주소 사용
+          let addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+          let extra = '';
+          if (data.userSelectedType === 'R') {
+            if (data.bname && /[동로가]$/.test(data.bname)) extra += data.bname;
+            if (data.buildingName && data.apartment === 'Y') extra += (extra ? ', ' : '') + data.buildingName;
+            if (extra) addr += ' (' + extra + ')';
+          }
+          postcodeInput.value = data.zonecode;
+          addressInput.value = addr;
+          closePostcodeLayer();
+          addressDetailInput.focus(); // 바로 상세주소 입력으로 이동
+        }
+      }).embed(postcodeEmbed);
+    }
+
+    document.getElementById('postcodeClose').addEventListener('click', closePostcodeLayer);
+    postcodeLayer.addEventListener('click', function (e) {
+      if (e.target === postcodeLayer) closePostcodeLayer();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && postcodeLayer.classList.contains('show')) closePostcodeLayer();
+    });
+
+    document.getElementById('addrSearchBtn').addEventListener('click', openPostcodeSearch);
+    postcodeInput.addEventListener('click', openPostcodeSearch);
+    addressInput.addEventListener('click', openPostcodeSearch);
 
     // 현금영수증 선택 시 번호 입력칸 표시
     cashReceiptSelect.addEventListener('change', () => {
@@ -1919,6 +2023,12 @@
     orderForm.addEventListener('submit', async function (event) {
       event.preventDefault();
 
+      if (!addressInput.value.trim()) {
+        alert('우편번호 검색 버튼을 눌러 배송지 주소를 선택해주세요.');
+        openPostcodeSearch();
+        return;
+      }
+
       const endpoint = orderForm.dataset.endpoint.trim();
       const button = orderForm.querySelector('button[type="submit"]');
       const originalText = button.textContent;
@@ -1928,6 +2038,11 @@
       const opt = ORDER_CONFIG.options[Number(optionSelect.value) || 0];
       const qty = Number(qtySelect.value) || 1;
       const amount = currentAmount();
+      const fullAddress = [
+        postcodeInput.value.trim() ? '[' + postcodeInput.value.trim() + ']' : '',
+        addressInput.value.trim(),
+        addressDetailInput.value.trim()
+      ].filter(Boolean).join(' ');
 
       // 주문관리 시트 컬럼과 매핑되는 payload
       const payload = {
@@ -1941,7 +2056,9 @@
         amount: amount,                        // 결제금액
         buyerName: nameInput.value.trim(),     // 주문자명
         phone: phoneInput.value.trim(),        // 연락처
-        address: document.getElementById('buyerAddress').value.trim(), // 주소
+        postcode: postcodeInput.value.trim(),  // 우편번호
+        address: fullAddress,                  // 주소 (우편번호+기본+상세 합본)
+        addressDetail: addressDetailInput.value.trim(), // 상세주소
         depositorName: depositorInput.value.trim(), // 입금자명
         cashReceipt: cashReceiptSelect.value,  // 현금영수증
         cashReceiptNo: cashReceiptNoInput.value.trim(), // 현금영수증 번호
@@ -1957,7 +2074,7 @@
           await fetch(endpoint, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(payload)
           });
         } else {
@@ -1982,9 +2099,24 @@
       }
     });
 
+    // 주문/알림 폼이 화면에 보이면 하단 고정 버튼 숨김 (모바일 입력창 가림 방지)
+    const floatingCta = document.querySelector('.floating-cta');
+    const ctaHideTargets = [document.getElementById('order'), document.getElementById('apply')].filter(Boolean);
+    if (floatingCta && 'IntersectionObserver' in window && ctaHideTargets.length) {
+      const visibleSections = new Set();
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) visibleSections.add(e.target);
+          else visibleSections.delete(e.target);
+        });
+        floatingCta.style.display = visibleSections.size ? 'none' : '';
+      }, { threshold: 0.12 });
+      ctaHideTargets.forEach(function (t) { io.observe(t); });
+    }
+
     // 계좌번호 복사
     document.getElementById('copyAccountBtn').addEventListener('click', async function () {
-      const text = `${ORDER_CONFIG.bank} ${ORDER_CONFIG.account}`;
+      const text = ORDER_CONFIG.account; // 은행 앱에 바로 붙여넣을 수 있도록 계좌번호만 복사
       try {
         await navigator.clipboard.writeText(text);
         this.textContent = '복사되었습니다!';
