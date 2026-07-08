@@ -1093,6 +1093,83 @@
       font-size: 13px;
     }
 
+    /* ===== 주문 조회 ===== */
+    .lookup-result {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lookup-msg {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #fffaf5;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .order-item {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      background: #fffaf5;
+    }
+
+    .order-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .order-item-top span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      flex: none;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14.5px;
+      margin-top: 4px;
+    }
+
+    .order-item-row span { color: var(--muted); }
+
+    .order-item-row b {
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .order-item-badges {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .badge-wait { background: var(--danger-soft); color: #9a4a2a; }
+    .badge-ok { background: #eef6ea; color: #3f5a39; }
+
     .faq-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1293,6 +1370,7 @@
         <a href="#why">제품 포인트</a>
         <a href="#routine">사용법</a>
         <a href="#apply">알림받기</a>
+        <a href="#track">주문 조회</a>
         <a class="nav-cta" href="#order">지금 주문하기</a>
       </nav>
     </div>
@@ -1648,9 +1726,40 @@
             <p class="complete-note">
               입금자명은 반드시 위와 같이 입력해주세요.<br />
               24시간 내 미입금 시 주문은 자동 취소될 수 있습니다.<br />
-              입금자명이 다를 경우 카카오톡 또는 문자로 연락 부탁드립니다.
+              입금자명이 다를 경우 카카오톡 또는 문자로 연락 부탁드립니다.<br />
+              입금 확인/배송 상태는 <a href="#track" style="text-decoration:underline;">주문 조회</a>에서 확인하실 수 있습니다.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="track">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Order Check</div>
+          <h2 class="section-title">주문 조회</h2>
+          <p class="section-desc">
+            주문 시 입력한 이름과 휴대폰 번호 뒷 4자리를 입력하면 입금 확인·배송 상태를 확인할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="form-card" style="max-width: 560px;">
+          <form id="trackForm">
+            <div class="field-row">
+              <div class="field">
+                <label for="trackName">주문자명</label>
+                <input id="trackName" type="text" autocomplete="name" placeholder="주문 시 입력한 이름" required />
+              </div>
+              <div class="field">
+                <label for="trackLast4">휴대폰 뒷 4자리</label>
+                <input id="trackLast4" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" title="휴대폰 번호 뒷 4자리 숫자를 입력해주세요." placeholder="예: 4860" required />
+              </div>
+            </div>
+            <button class="submit-btn" type="submit">주문 조회하기</button>
+            <p class="form-helper">주문 직후에는 시트 반영까지 잠시 시간이 걸릴 수 있습니다.</p>
+          </form>
+          <div class="lookup-result" id="trackResult" role="status" aria-live="polite"></div>
         </div>
       </div>
     </section>
@@ -2101,7 +2210,7 @@
 
     // 주문/알림 폼이 화면에 보이면 하단 고정 버튼 숨김 (모바일 입력창 가림 방지)
     const floatingCta = document.querySelector('.floating-cta');
-    const ctaHideTargets = [document.getElementById('order'), document.getElementById('apply')].filter(Boolean);
+    const ctaHideTargets = [document.getElementById('order'), document.getElementById('track'), document.getElementById('apply')].filter(Boolean);
     if (floatingCta && 'IntersectionObserver' in window && ctaHideTargets.length) {
       const visibleSections = new Set();
       const io = new IntersectionObserver(function (entries) {
@@ -2124,6 +2233,83 @@
         prompt('아래 계좌번호를 복사해주세요.', text);
       }
       setTimeout(() => { this.textContent = '계좌번호 복사하기'; }, 2000);
+    });
+
+    /* ---------- 주문 조회 ----------
+       Apps Script에 doGet(조회) 코드가 배포되어 있어야 작동합니다.
+       (함께 제공된 apps-script-order-lookup.gs 참고) */
+    const trackForm = document.getElementById('trackForm');
+    const trackResult = document.getElementById('trackResult');
+
+    function esc(t) {
+      return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function fmtDate(v) {
+      const d = new Date(v);
+      if (isNaN(d)) return esc(v);
+      return d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function badge(text, good) {
+      return '<span class="status-badge ' + (good ? 'badge-ok' : 'badge-wait') + '">' + esc(text) + '</span>';
+    }
+
+    function renderOrders(orders) {
+      trackResult.innerHTML = orders.map(function (o) {
+        const pay = String(o.paymentStatus || '입금 확인 전');
+        const ship = String(o.shippingStatus || '배송 준비 전');
+        const payGood = /확인|완료/.test(pay);
+        const shipGood = /발송|배송중|완료|출고/.test(ship);
+        return '<div class="order-item">'
+          + '<div class="order-item-top"><div>' + esc(o.productName) + ' · ' + esc(o.option) + ' × ' + esc(o.qty) + '</div><span>' + fmtDate(o.orderedAt) + '</span></div>'
+          + '<div class="order-item-row"><span>주문번호</span><b>' + esc(o.orderNo) + '</b></div>'
+          + '<div class="order-item-row"><span>결제금액</span><b>' + won(Number(o.amount) || 0) + '</b></div>'
+          + '<div class="order-item-badges">'
+          + badge('입금: ' + pay, payGood)
+          + badge('배송: ' + ship, shipGood)
+          + (o.trackingNo ? badge('운송장 ' + o.trackingNo, true) : '')
+          + '</div></div>';
+      }).join('');
+    }
+
+    trackForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const endpoint = orderForm.dataset.endpoint.trim();
+      const name = document.getElementById('trackName').value.trim();
+      const last4 = document.getElementById('trackLast4').value.trim();
+      const button = trackForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+
+      if (!endpoint) {
+        trackResult.innerHTML = '<div class="lookup-msg">조회 서비스 준비 중입니다. 잠시 후 다시 시도해주세요.</div>';
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = '조회 중입니다...';
+      trackResult.innerHTML = '';
+
+      try {
+        const url = endpoint + '?type=lookup&name=' + encodeURIComponent(name) + '&last4=' + encodeURIComponent(last4);
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data && data.ok && data.orders && data.orders.length) {
+          renderOrders(data.orders);
+        } else {
+          trackResult.innerHTML = '<div class="lookup-msg">일치하는 주문 내역이 없습니다. 주문 시 입력한 이름과 휴대폰 뒷 4자리를 다시 확인해주세요.<br />방금 주문하셨다면 잠시 후 다시 조회해주세요.</div>';
+        }
+      } catch (error) {
+        console.error(error);
+        trackResult.innerHTML = '<div class="lookup-msg">조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</div>';
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
     });
   </script>
 </body>
