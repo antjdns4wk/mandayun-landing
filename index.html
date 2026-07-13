@@ -905,6 +905,138 @@
       letter-spacing: -0.03em;
     }
 
+    .option-picker {
+      padding: 18px;
+      border: 1px solid #e2d6c6;
+      border-radius: 18px;
+      background: #fdf7ee;
+      margin-bottom: 16px;
+    }
+
+    .option-picker .field:last-of-type { margin-bottom: 0; }
+
+    .option-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .option-price-row span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .option-price-row span strong {
+      color: var(--brand-dark);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-left: 4px;
+    }
+
+    .add-option-btn {
+      flex: none;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--accent);
+      color: var(--brand-dark);
+      font: inherit;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 8px 20px rgba(214, 164, 95, 0.3);
+    }
+
+    .add-option-btn:hover { transform: translateY(-1px); }
+    .add-option-btn:active { transform: translateY(0); }
+
+    .cart-box { margin-bottom: 16px; }
+
+    .cart-empty {
+      padding: 16px;
+      border: 1px dashed #d9c9b3;
+      border-radius: 16px;
+      background: #fffaf5;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fffaf5;
+      margin-bottom: 8px;
+    }
+
+    .cart-item:last-child { margin-bottom: 0; }
+
+    .cart-item-info { flex: 1; min-width: 0; }
+
+    .cart-item-name {
+      font-weight: 900;
+      color: var(--brand-dark);
+      font-size: 14.5px;
+      letter-spacing: -0.02em;
+    }
+
+    .cart-item-price {
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-top: 2px;
+    }
+
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: none;
+    }
+
+    .cart-qty button {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #d9c9b3;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--brand-dark);
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .cart-qty span {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 900;
+      color: var(--brand-dark);
+    }
+
+    .cart-remove {
+      flex: none;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
+
+    .cart-remove:hover { color: #9a4a2a; }
+
     .field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1475,17 +1607,13 @@
         </div>
 
         <div class="hero-card" aria-label="제품 대표 이미지 영역">
-          <!-- ★ 이미지 넣는 방법
-               1) index.html과 같은 위치에 images 폴더를 만들고 사진 파일을 넣으세요.
-               2) 아래 img src를 실제 파일명으로 바꾸세요. (예: images/샴푸1.jpg)
-               3) 슬라이드를 늘리려면 <div class="slide"> 한 줄을 복사해서 추가하면 됩니다.
-               4) 전환 속도는 스크립트 상단 SLIDE_INTERVAL 값(밀리초)으로 조절하세요. -->
+          <!-- 슬라이드 추가: <div class="slide"> 줄 복사 / 전환 속도: 스크립트의 SLIDE_INTERVAL -->
           <div class="hero-slider" id="heroSlider">
-            <div class="slide active"><img src="images/shampoo-dry.png" alt="머드마스터 제품 이미지 1"></div>
-            <div class="slide"><img src="images/shampoo-oil.png" alt="머드마스터 제품 이미지 2"></div>
-            <div class="slide"><img src="images/pack-dry.png" alt="머드마스터 제품 이미지 3"></div>
-	    <div class="slide"><img src="images/pack-oil.png" alt="머드마스터 제품 이미지 4"></div>
-	    <div class="slide"><img src="images/pinkclay-gel.png" alt="머드마스터 제품 이미지 5"></div>
+            <div class="slide active"><img src="images/product-1.png" alt="머드마스터 제품 이미지 1"></div>
+            <div class="slide"><img src="images/product-2.png" alt="머드마스터 제품 이미지 2"></div>
+            <div class="slide"><img src="images/product-3.png" alt="머드마스터 제품 이미지 3"></div>
+            <div class="slide"><img src="images/product-4.png" alt="머드마스터 제품 이미지 4"></div>
+            <div class="slide"><img src="images/product-5.png" alt="머드마스터 제품 이미지 5"></div>
             <div class="slider-dots" id="sliderDots" aria-label="슬라이드 선택"></div>
           </div>
         </div>
@@ -1673,24 +1801,42 @@
               4) 현재는 데모 모드라 제출 시 완료 화면만 표시됩니다.
             -->
             <form id="orderForm" data-endpoint="https://script.google.com/macros/s/AKfycbyaBFkD6pTgyddwL_bdlfBtuhLS-SW0Y0I-zNO3uCPcGMyRVA8ESTmlI1sPvUmMAc8K/exec">
-              <div class="field">
-                <label for="orderOption">옵션 선택</label>
-                <select id="orderOption" name="option" required></select>
+              <div class="option-picker">
+                <div class="field">
+                  <label for="orderProduct">제품 선택</label>
+                  <select id="orderProduct" name="product"></select>
+                </div>
+
+                <div class="field-row">
+                  <div class="field">
+                    <label for="orderVolume">용량 선택</label>
+                    <select id="orderVolume" name="volume"></select>
+                  </div>
+                  <div class="field">
+                    <label for="orderQty">수량</label>
+                    <select id="orderQty">
+                      <option value="1">1개</option>
+                      <option value="2">2개</option>
+                      <option value="3">3개</option>
+                      <option value="4">4개</option>
+                      <option value="5">5개</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="option-price-row">
+                  <span>단품 가격 <strong id="optionUnitPrice">0원</strong></span>
+                  <button type="button" class="add-option-btn" id="addOptionBtn">＋ 옵션 담기</button>
+                </div>
               </div>
 
-              <div class="field">
-                <label for="orderQty">수량</label>
-                <select id="orderQty" name="qty" required>
-                  <option value="1">1개</option>
-                  <option value="2">2개</option>
-                  <option value="3">3개</option>
-                  <option value="4">4개</option>
-                  <option value="5">5개</option>
-                </select>
+              <div class="cart-box">
+                <div class="cart-empty" id="cartEmpty">담긴 옵션이 없습니다. 제품·용량·수량을 고르고 “＋ 옵션 담기”를 눌러주세요. 여러 옵션을 한 번에 담아 주문할 수 있습니다.</div>
+                <div id="cartList"></div>
               </div>
 
               <div class="price-summary">
-                <span>결제금액</span>
+                <span>총 결제금액</span>
                 <div style="text-align:right;">
                   <strong id="orderAmountText">0원</strong>
                   <div id="orderCalcText" style="font-size:12.5px; font-weight:700; opacity:.75; margin-top:2px;"></div>
@@ -1992,16 +2138,28 @@
        ===================================================== */
     const ORDER_CONFIG = {
       productName: '머드마스터',
-      options: [
-        { label: '샴푸 건성 300ml', price: 35000 },
-        { label: '샴푸 건성 1000ml', price: 80000 },
-        { label: '샴푸 지성 300ml', price: 35000 },
-        { label: '샴푸 지성 1000ml', price: 83000 },
-        { label: '팩 건성 300g', price: 45000 },
-        { label: '팩 건성 1000g', price: 120000 },
-        { label: '팩 지성 300g', price: 45000 },
-        { label: '팩 지성 1000g', price: 120000 },
-        { label: '핑크클레이 젤 150ml', price: 36000 }
+      // 제품별로 용량(용량/가격) 옵션을 묶어서 관리합니다.
+      // 새 제품/용량을 추가하려면 아래 products 배열만 수정하세요.
+      products: [
+        { name: '샴푸 건성', variants: [
+          { volume: '300ml', price: 35000 },
+          { volume: '1000ml', price: 80000 }
+        ] },
+        { name: '샴푸 지성', variants: [
+          { volume: '300ml', price: 35000 },
+          { volume: '1000ml', price: 83000 }
+        ] },
+        { name: '팩 건성', variants: [
+          { volume: '300g', price: 45000 },
+          { volume: '1000g', price: 120000 }
+        ] },
+        { name: '팩 지성', variants: [
+          { volume: '300g', price: 45000 },
+          { volume: '1000g', price: 120000 }
+        ] },
+        { name: '핑크클레이 젤', variants: [
+          { volume: '150ml', price: 36000 }
+        ] }
       ],
       bank: '국민은행',
       account: '000000-00-000000',
@@ -2100,8 +2258,13 @@
     const orderForm = document.getElementById('orderForm');
     const orderCard = document.getElementById('orderCard');
     const orderComplete = document.getElementById('orderComplete');
-    const optionSelect = document.getElementById('orderOption');
+    const productSelect = document.getElementById('orderProduct');
+    const volumeSelect = document.getElementById('orderVolume');
     const qtySelect = document.getElementById('orderQty');
+    const unitPriceText = document.getElementById('optionUnitPrice');
+    const addOptionBtn = document.getElementById('addOptionBtn');
+    const cartListEl = document.getElementById('cartList');
+    const cartEmptyEl = document.getElementById('cartEmpty');
     const amountText = document.getElementById('orderAmountText');
     const calcText = document.getElementById('orderCalcText');
     const nameInput = document.getElementById('buyerName');
@@ -2111,29 +2274,118 @@
     const cashReceiptNoField = document.getElementById('cashReceiptNoField');
     const cashReceiptNoInput = document.getElementById('cashReceiptNo');
 
-    // 옵션 드롭다운 채우기
-    ORDER_CONFIG.options.forEach((opt, i) => {
+    // 장바구니: 여러 옵션을 담아 한 번에 주문할 수 있습니다.
+    // 각 항목 { key, name, volume, price, qty }
+    let cart = [];
+
+    // 제품 드롭다운 채우기
+    ORDER_CONFIG.products.forEach((p, i) => {
       const o = document.createElement('option');
       o.value = String(i);
-      o.textContent = `${opt.label} — ${won(opt.price)}`;
-      optionSelect.appendChild(o);
+      o.textContent = p.name;
+      productSelect.appendChild(o);
     });
 
-    function currentAmount() {
-      const opt = ORDER_CONFIG.options[Number(optionSelect.value) || 0];
-      return opt.price * (Number(qtySelect.value) || 1);
+    function currentProduct() {
+      return ORDER_CONFIG.products[Number(productSelect.value) || 0];
+    }
+
+    function currentVariant() {
+      const p = currentProduct();
+      return p.variants[Number(volumeSelect.value) || 0];
+    }
+
+    // 선택된 제품에 맞춰 용량 드롭다운 다시 채우기
+    function fillVolumes() {
+      const p = currentProduct();
+      volumeSelect.innerHTML = '';
+      p.variants.forEach((v, i) => {
+        const o = document.createElement('option');
+        o.value = String(i);
+        o.textContent = `${v.volume} — ${won(v.price)}`;
+        volumeSelect.appendChild(o);
+      });
+      renderUnitPrice();
+    }
+
+    function renderUnitPrice() {
+      unitPriceText.textContent = won(currentVariant().price);
+    }
+
+    function cartTotal() {
+      return cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+    }
+
+    function cartQtyTotal() {
+      return cart.reduce((sum, c) => sum + c.qty, 0);
+    }
+
+    function cartSummary() {
+      // 완료 화면/주문서에 표시할 텍스트
+      return cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(', ');
     }
 
     function renderAmount() {
-      const opt = ORDER_CONFIG.options[Number(optionSelect.value) || 0];
-      const qty = Number(qtySelect.value) || 1;
-      amountText.textContent = won(currentAmount());
-      calcText.textContent = opt.label + ' × ' + qty;
+      amountText.textContent = won(cartTotal());
+      calcText.textContent = cart.length ? cartSummary() : '';
     }
 
-    optionSelect.addEventListener('change', renderAmount);
-    qtySelect.addEventListener('change', renderAmount);
-    renderAmount();
+    function renderCart() {
+      if (!cart.length) {
+        cartEmptyEl.style.display = 'block';
+        cartListEl.innerHTML = '';
+      } else {
+        cartEmptyEl.style.display = 'none';
+        cartListEl.innerHTML = cart.map((c, i) =>
+          '<div class="cart-item">'
+          + '<div class="cart-item-info">'
+          + '<div class="cart-item-name">' + esc(c.name) + ' · ' + esc(c.volume) + '</div>'
+          + '<div class="cart-item-price">' + won(c.price) + ' × ' + c.qty + ' = ' + won(c.price * c.qty) + '</div>'
+          + '</div>'
+          + '<div class="cart-qty">'
+          + '<button type="button" data-act="dec" data-i="' + i + '" aria-label="수량 감소">−</button>'
+          + '<span>' + c.qty + '</span>'
+          + '<button type="button" data-act="inc" data-i="' + i + '" aria-label="수량 증가">+</button>'
+          + '</div>'
+          + '<button type="button" class="cart-remove" data-act="del" data-i="' + i + '" aria-label="삭제">✕</button>'
+          + '</div>'
+        ).join('');
+      }
+      renderAmount();
+    }
+
+    // 옵션 담기
+    addOptionBtn.addEventListener('click', () => {
+      const p = currentProduct();
+      const v = currentVariant();
+      const qty = Number(qtySelect.value) || 1;
+      const key = p.name + '|' + v.volume;
+      const existing = cart.find(c => c.key === key);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ key: key, name: p.name, volume: v.volume, price: v.price, qty: qty });
+      }
+      renderCart();
+    });
+
+    // 장바구니 수량 조절 / 삭제 (이벤트 위임)
+    cartListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-act]');
+      if (!btn) return;
+      const i = Number(btn.dataset.i);
+      const act = btn.dataset.act;
+      if (!cart[i]) return;
+      if (act === 'inc') cart[i].qty += 1;
+      else if (act === 'dec') cart[i].qty = Math.max(1, cart[i].qty - 1);
+      else if (act === 'del') cart.splice(i, 1);
+      renderCart();
+    });
+
+    productSelect.addEventListener('change', fillVolumes);
+    volumeSelect.addEventListener('change', renderUnitPrice);
+    fillVolumes();
+    renderCart();
 
     // 입금자명 자동 생성 (이름 + 휴대폰 뒷자리 4자리) — 직접 수정하면 자동 갱신 중단
     let depositorEdited = false;
@@ -2260,11 +2512,16 @@
       const button = orderForm.querySelector('button[type="submit"]');
       const originalText = button.textContent;
 
+      if (!cart.length) {
+        alert('주문할 옵션을 담아주세요. 제품·용량을 고르고 "＋ 옵션 담기"를 눌러주세요.');
+        return;
+      }
+
       const now = new Date();
       const orderNo = makeOrderNo(now);
-      const opt = ORDER_CONFIG.options[Number(optionSelect.value) || 0];
-      const qty = Number(qtySelect.value) || 1;
-      const amount = currentAmount();
+      const optionSummary = cart.map(c => `${c.name} ${c.volume} × ${c.qty}`).join(' / ');
+      const qty = cartQtyTotal();
+      const amount = cartTotal();
       const fullAddress = [
         postcodeInput.value.trim() ? '[' + postcodeInput.value.trim() + ']' : '',
         addressInput.value.trim(),
@@ -2278,8 +2535,9 @@
         orderNo: orderNo,                      // 주문번호
         channel: channel,                      // 유입경로
         productName: ORDER_CONFIG.productName, // 상품명
-        option: opt.label,                     // 옵션
-        qty: qty,                              // 수량
+        option: optionSummary,                 // 옵션 (담은 전체 항목 요약)
+        items: JSON.stringify(cart.map(c => ({ name: c.name, volume: c.volume, price: c.price, qty: c.qty }))), // 옵션 상세(JSON)
+        qty: qty,                              // 총 수량
         amount: amount,                        // 결제금액
         buyerName: nameInput.value.trim(),     // 주문자명
         phone: phoneInput.value.trim(),        // 연락처
@@ -2310,7 +2568,7 @@
 
         // 완료 화면 표시
         document.getElementById('cOrderNo').textContent = orderNo;
-        document.getElementById('cProduct').textContent = `${ORDER_CONFIG.productName} · ${opt.label} × ${qty}`;
+        document.getElementById('cProduct').textContent = optionSummary;
         document.getElementById('cAmount').textContent = won(amount);
         document.getElementById('cAccount').textContent = `${ORDER_CONFIG.bank} ${ORDER_CONFIG.account} (${ORDER_CONFIG.holder})`;
         document.getElementById('cDepositor').textContent = payload.depositorName || '주문자명+휴대폰 뒷자리';
